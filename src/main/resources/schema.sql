@@ -26,3 +26,21 @@ CREATE TABLE  PRODUCT (
     foreign key (category_id) references PRODUCT_CATEGORY(id),
     PRIMARY KEY(id));
 
+-- -----------------------------------------------------
+-- Table country
+-- -----------------------------------------------------
+CREATE TABLE COUNTRY (
+    ID int not null AUTO_INCREMENT,
+    CODE VARCHAR(5) NOT NULL,
+    NAME varchar(80) NOT NULL,
+    PRIMARY KEY (id));
+
+-- -----------------------------------------------------
+-- Table state
+-- -----------------------------------------------------
+CREATE TABLE STATE (
+    ID int not null AUTO_INCREMENT,
+    NAME varchar(80) NOT NULL,
+    COUNTRY_ID INT NOT NULL,
+    foreign key (COUNTRY_ID) references COUNTRY(ID),
+    PRIMARY KEY (ID));
