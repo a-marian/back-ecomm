@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS product_category;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS state;
+DROP TABLE IF EXISTS customer;
+DROP  TABLE IF EXISTS ORDERS;
 -- -----------------------------------------------------
 -- Table product_category`
 -- -----------------------------------------------------
@@ -44,3 +47,27 @@ CREATE TABLE STATE (
     COUNTRY_ID INT NOT NULL,
     foreign key (COUNTRY_ID) references COUNTRY(ID),
     PRIMARY KEY (ID));
+
+-- -----------------------------------------------------
+-- Table state
+-- -----------------------------------------------------
+CREATE TABLE CUSTOMER (
+                       ID int not null AUTO_INCREMENT,
+                       NAME varchar(80) NOT NULL,
+                       COUNTRY_ID INT NOT NULL,
+                       foreign key (COUNTRY_ID) references COUNTRY(ID),
+                       PRIMARY KEY (ID));
+
+-- -----------------------------------------------------
+-- Table order
+-- -----------------------------------------------------
+CREATE TABLE ORDER (
+                          ID int not null AUTO_INCREMENT,
+                          ORDER_TRACKING_NUMBER VARCHAR(80) NOT NULL,
+                          TOTAL_QUANTITY INT NOT NULL,
+                          TOTAL_PRICE FLOAT NOT NULL,
+                          STATUS VARCHAR,
+                          CREATED_DATE DATE NULL,
+                          LAST_UPDATED DATE
+                          foreign key (COUNTRY_ID) references COUNTRY(ID),
+                          PRIMARY KEY (ID));

@@ -1,17 +1,19 @@
 package com.back.ecomm.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="state")
+@NoArgsConstructor
+@Table(name="STATE")
 public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="state_id")
+    private Long stateId;
 
     @Column(name = "name")
     private String name;
