@@ -1,4 +1,4 @@
-package com.back.ecomm.dao;
+package com.back.ecomm.repository;
 
 import com.back.ecomm.entity.Order;
 import org.springframework.data.domain.Page;
