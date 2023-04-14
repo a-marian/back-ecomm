@@ -3,15 +3,13 @@ package com.back.ecomm.controller;
 
 import com.back.ecomm.record.ProductRecord;
 import com.back.ecomm.service.ProductService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +35,12 @@ public class ProductController {
       List<ProductRecord> productRecords = productService.findAllProducts(categoryId, productName, pageable);
         return new ResponseEntity<>(productRecords, HttpStatus.OK);
     }
+
+    @GetMapping("product/{productId}")
+    ResponseEntity<ProductRecord> findProduct(@NonNull @PathVariable String productId){
+
+        ProductRecord productRecord = productService.findProduct(productId);
+        return new ResponseEntity<>(productRecord, HttpStatus.OK );
+    }
+
 }

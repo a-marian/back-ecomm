@@ -35,10 +35,20 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductRecord> findAllProducts(Long categoryId, String productName, Pageable pageable) {
         List<Product> products;
         if (categoryId == null){
-            products = productRepository.findByProductNameContaining(productName, pageable);
+            products = productRepository.findAllByProductName(productName, pageable);
         }else {
             products = productRepository.findByCategoryCategoryId(categoryId, pageable);
         }
         return productMapper.entityToRecord(products);
+    }
+
+    @Override
+    public ProductRecord findProduct(String productId) {
+        var product = productRepository.findById(Long.valueOf(productId));
+        if (product.isPresent()){
+            return productMapper.entityToRecord(product.get());
+        }else{
+            return null;
+        }
     }
 }

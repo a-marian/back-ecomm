@@ -10,4 +10,6 @@ public interface ProductService {
     List<ProductRecord> findByCategoryId(Long categoryId, Pageable pageable);
 
     List<ProductRecord> findAllProducts(Long categoryId, String productName, Pageable pageable);
+
+    ProductRecord findProduct(String productId);
 }
