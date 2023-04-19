@@ -32,7 +32,7 @@ public class ProductController {
             @RequestParam(defaultValue = "3") int size
     ){
         Pageable pageable = PageRequest.of(page, size);
-      List<ProductRecord> productRecords = productService.findAllProducts(categoryId, productName, pageable);
+      List<ProductRecord> productRecords = productService.findAllProducts(categoryId, productName);
         return new ResponseEntity<>(productRecords, HttpStatus.OK);
     }
 

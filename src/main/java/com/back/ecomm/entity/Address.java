@@ -10,7 +10,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "ADDRESS")
 public class Address {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="address_id")

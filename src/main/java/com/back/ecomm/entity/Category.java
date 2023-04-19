@@ -2,6 +2,7 @@ package com.back.ecomm.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "CATEGORY")
 public class Category {

@@ -1,13 +1,17 @@
 package com.back.ecomm.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name="PRODUCT")
 @Data

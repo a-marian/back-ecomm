@@ -6,7 +6,6 @@ import com.back.ecomm.record.ProductRecord;
 import com.back.ecomm.repository.ProductRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,19 +24,19 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductRecord> findByCategoryId(@NonNull Long categoryId, Pageable pageable) {
-        List<Product> page = productRepository.findByCategoryCategoryId(categoryId, pageable );
+    public List<ProductRecord> findByCategoryId(@NonNull Long categoryId) {
+        List<Product> page = productRepository.findByCategoryCategoryId(categoryId);
         List<Product> products = page.stream().toList();
         return productMapper.entityToRecord(products);
     }
 
     @Override
-    public List<ProductRecord> findAllProducts(Long categoryId, String productName, Pageable pageable) {
+    public List<ProductRecord> findAllProducts(Long categoryId, String productName) {
         List<Product> products;
         if (categoryId == null){
-            products = productRepository.findAllByProductName(productName, pageable);
+            products = productRepository.findByProductNameLike(productName);
         }else {
-            products = productRepository.findByCategoryCategoryId(categoryId, pageable);
+            products = productRepository.findByCategoryCategoryId(categoryId);
         }
         return productMapper.entityToRecord(products);
     }
