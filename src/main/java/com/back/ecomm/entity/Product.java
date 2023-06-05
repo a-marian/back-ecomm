@@ -14,7 +14,6 @@ import java.util.Date;
 @EqualsAndHashCode
 @Entity
 @Table(name="PRODUCT")
-@Data
 public class Product {
 
     @Id
