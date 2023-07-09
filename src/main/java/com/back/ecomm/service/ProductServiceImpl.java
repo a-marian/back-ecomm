@@ -43,11 +43,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductRecord findProduct(String productId) {
-        var product = productRepository.findById(Long.valueOf(productId));
-        if (product.isPresent()){
-            return productMapper.entityToRecord(product.get());
-        }else{
-            return null;
-        }
+        Product product = productRepository.findById(Long.valueOf(productId))
+                .orElseThrow(() -> new IllegalArgumentException("product not found"));
+        return  productMapper.entityToRecord(product);
     }
 }
