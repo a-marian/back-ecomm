@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService {
                        @Autowired  ProductRepository productRepository){
         this.productMapper = mapper;
         this.productRepository = productRepository;
+
     }
 
 
@@ -28,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> page = productRepository.findByCategoryCategoryId(categoryId);
         List<Product> products = page.stream().toList();
         return productMapper.entityToRecord(products);
+
     }
 
     @Override
