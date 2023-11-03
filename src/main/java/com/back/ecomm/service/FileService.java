@@ -2,9 +2,10 @@ package com.back.ecomm.service;
 
 
 import com.back.ecomm.record.FileUploadRequest;
-import com.back.ecomm.record.FileUploadResponse;
+
+import java.io.IOException;
 
 public interface FileService {
 
-    FileUploadResponse upload(FileUploadRequest fileUploadRequest);
+    String upload(FileUploadRequest fileUploadRequest) throws IOException;
 }
