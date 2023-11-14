@@ -1,0 +1,41 @@
+server.port: 80
+
+spring.datasource:
+  url : jdbc:postgresql://localhost:5432/ecomm
+  username: postgres
+  password: ENC(t0ADr6e0/4nZxomqfQCWRK2oIKgUIWO3)
+
+spring.jpa:
+  show-sql: true
+  generate-ddl: true
+  allowed.origins: http://localhost:4200
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  hibernate:
+    ddl-auto: update
+    #spring.sql.init.mode=always
+
+okta:
+  base-url: ${OKTA_BASE_URL}
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          my-client:
+            provider: okta
+            client-id: ${OKTA_CLIENT_ID}
+            client-secret: ${OKTA_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          okta:
+            authorization-uri: ${okta.base-url}/oauth2/v1/authorize
+            token-uri: ${okta.base-url}/oauth2/v1/token
+            user-info-uri: ${okta.base-url}/oauth2/v1/userinfo
+            jwk-set-uri: ${okta.base-url}/oauth2/v1/keys
+            user-name-attribute: sub

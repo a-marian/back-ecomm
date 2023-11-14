@@ -37,7 +37,7 @@ public class FileController {
 
         FileUploadRequest fileUploadRequest = new FileUploadRequest(file, fileName);
         String uploadedFileName = service.upload(fileUploadRequest);
-        String url = "/downloadFile".concat(uploadedFileName);
+        String url = "/downloadFile/".concat(uploadedFileName);
         FileUploadResponse response = new FileUploadResponse(fileName, url, size);
         return ResponseEntity.ok(response);
     }
