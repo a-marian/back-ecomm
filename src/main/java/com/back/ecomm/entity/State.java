@@ -15,10 +15,18 @@ public class State {
     @Column(name="state_id")
     private Long stateId;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "name")
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
+
+    public State(String code, String name){
+        this.code = code;
+        this.name = name;
+    }
 }
