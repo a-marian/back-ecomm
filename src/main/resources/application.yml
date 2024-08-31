@@ -16,3 +16,4 @@ spring.jpa:
     ddl-auto: update
     #spring.sql.init.mode=always
 
+
