@@ -1,6 +1,8 @@
 package com.back.ecomm.controller;
 
 
+import com.back.ecomm.record.UserLoginRecord;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class AuthenticationController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
@@ -24,10 +26,10 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    ResponseEntity<String> login(@RequestParam("username") String username,
-                                 @RequestParam("password") String password){
+    ResponseEntity<String> login(@Valid @RequestBody UserLoginRecord userLoginRecord){
+        LOGGER.info("login user: "+ userLoginRecord.username());
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password));
+                new UsernamePasswordAuthenticationToken(userLoginRecord.username(), userLoginRecord.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return  ResponseEntity.ok("logged");
     }

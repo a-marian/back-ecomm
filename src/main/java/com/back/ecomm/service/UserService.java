@@ -1,5 +1,7 @@
 package com.back.ecomm.service;
 
+import com.back.ecomm.entity.User;
+import com.back.ecomm.entity.VerificationToken;
 import com.back.ecomm.record.UserRecord;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,9 +9,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface UserService extends UserDetailsService {
 
-    boolean save(UserRecord userRecord) throws UsernameNotFoundException;
+    User save(UserRecord userRecord) throws UsernameNotFoundException;
 
-    boolean existsUser(String username, String email);
+    boolean existsUser(String username);
 
-    String generateToken(String username);
+    void createVerificationToken(User user, String token);
+    VerificationToken getVerificationToken(String verificationToken);
 }

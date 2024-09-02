@@ -20,16 +20,7 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userService;
 
-    @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws  Exception {
-        httpSecurity.authorizeHttpRequests( auth ->
-                        auth.requestMatchers( "/login/**", "/logout/**", "/api/register").permitAll()
-                                .anyRequest().authenticated())
-                .logout(logout -> logout.invalidateHttpSession(true)
-                        .clearAuthentication(true).permitAll());
-        httpSecurity.csrf().disable();
-        return httpSecurity.build();
-    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -48,5 +39,16 @@ public class SecurityConfig {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .authenticationProvider(authenticationProvider())
                 .build();
+    }
+
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws  Exception {
+        httpSecurity.authorizeHttpRequests( auth ->
+                        auth.requestMatchers( "/api/login", "/api/register").permitAll()
+                                .anyRequest().authenticated())
+                .logout(logout -> logout.invalidateHttpSession(true)
+                        .clearAuthentication(true).permitAll());
+        httpSecurity.csrf().disable();
+        return httpSecurity.build();
     }
 }
