@@ -29,6 +29,28 @@ spring:
       mail.smtps.starttls.enable: true
       mail.smtps.timeout: 8000
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,readiness,liveness
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    readinessprobe:
+      enabled: true
+      initialDelay: 30s
+      period: 10s
+      timeout: 5s
+      failureThreshold: 3
+      successThreshold: 1
+    livenessprobe:
+      enabled: true
+
 
 
 
