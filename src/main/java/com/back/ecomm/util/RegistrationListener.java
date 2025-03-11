@@ -11,9 +11,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegisteredUserEvent> {
+
+    private static final String CONFIRMATION_URL = "/registrationConfirm";
+
+    private static final Logger LOGGER = Logger.getLogger(RegistrationListener.class.getName());
 
     @Autowired
     private UserService userService;
@@ -36,8 +41,10 @@ public class RegistrationListener implements ApplicationListener<OnRegisteredUse
         String recipientAddress= user.getMail();
         String subject="Registration confirmation";
         String confirmationURL= event.getAppUrl()+"/registration?confirmToken="+token;
-        String message = messageSource.getMessage("message.regSucc", null, event.getLocale());
-
+        LOGGER.info("Confirmation URL: " + confirmationURL);
+        String message = messageSource.getMessage("regSuccess", null, event.getLocale());
+        LOGGER.info("Sending email to: " + recipientAddress);
+        LOGGER.info(message);
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);

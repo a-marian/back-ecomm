@@ -5,6 +5,9 @@ import com.back.ecomm.record.OnRegisteredUserEvent;
 import com.back.ecomm.record.UserRecord;
 import com.back.ecomm.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +33,12 @@ public class UserController {
             return ResponseEntity.ok("User already registered");
         }
         User user = userService.save(userRecord);
+        
         if (user != null){
             String appURL = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegisteredUserEvent(user, request.getLocale(), appURL));
+            eventPublisher.publishEvent(new OnRegisteredUserEvent(user, Locale.getDefault(), appURL));
+           
+        }else{ 
             return ResponseEntity.ok("user not registered, try again");
         }
         return ResponseEntity.ok("user registered");

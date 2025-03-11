@@ -1,4 +1,4 @@
 package com.back.ecomm.record;
 
-public record UserRecord (String username, String password, String email){
+public record UserRecord (String username, String password, String mail){
 }
