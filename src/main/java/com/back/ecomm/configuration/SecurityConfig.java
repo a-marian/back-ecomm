@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,14 +63,14 @@ public class SecurityConfig {
         httpSecurity.cors(corsCustom -> corsCustom.configurationSource(new CorsConfigurationSource() {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                         return   corsConfiguration();
+                         return corsConfiguration();
                     }
                 })).authorizeHttpRequests( auth ->
-                        auth.requestMatchers( "/api/login", "/api/register", "/api/products/**").permitAll()
-                                .anyRequest().authenticated())
+                        auth.requestMatchers( "/api/claims/**", "/api/user/**").authenticated()
+                                .anyRequest().permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout.invalidateHttpSession(true)
                         .clearAuthentication(true).permitAll());
-        httpSecurity.csrf().disable();
         return httpSecurity.build();
     }
 }
