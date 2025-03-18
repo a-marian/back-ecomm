@@ -19,7 +19,11 @@ spring.jpa:
       dialect: org.hibernate.dialect.PostgreSQLDialect
   hibernate:
     ddl-auto: update
-    #spring.sql.init.mode=always
+
+# uncomment to fill data to DB
+#  spring.sql:
+#    init:
+#      mode: always
 
 spring:
   mail:
