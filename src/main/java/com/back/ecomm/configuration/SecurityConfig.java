@@ -1,5 +1,6 @@
 package com.back.ecomm.configuration;
 
+import com.back.ecomm.properties.SecurityProperty;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,8 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsService userService;
-
+    @Autowired
+    private SecurityProperty securityProperty;
 
 
     @Bean
@@ -51,7 +53,7 @@ public class SecurityConfig {
     public CorsConfiguration corsConfiguration(){
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true); //allows taking authentication with credentials
-        corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));  // providing the allowed origin details,
+        corsConfig.setAllowedOrigins(Arrays.asList(securityProperty.getCorsPermittedIncome()));  // providing the allowed origin details,
         corsConfig.setAllowedMethods(Collections.singletonList("*")); // allowing all HTTP methods
         corsConfig.setAllowedHeaders(Collections.singletonList("*")); // allowing all the request headers
         corsConfig.setMaxAge(Duration.ofMinutes(5L)); // setting the max time till which the allowed origin will not make a preflight request again to check if the CORS is allowed or not
